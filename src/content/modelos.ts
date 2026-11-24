@@ -72,6 +72,14 @@ export const modelos: Modelo[] = [
     ],
     destaques: ["Não paga IPVA", "Não gasta gasolina", "Não precisa de CNH"],
   },
+  // New Bike 1000W: preço do story promocional da loja ("de R$ 7.200 por R$ 6.900 à vista"). Só o motor consta na legenda.
+  {
+    id: "new-bike",
+    nome: "New Bike 1000W",
+    foto: "/fotos/new-bike-promo.jpg",
+    preco: "R$ 6.900,00 à vista (de R$ 7.200,00)",
+    specs: [{ rotulo: "Motor", valor: "1000W" }],
+  },
   // Espaço provisório: imagem gerada por IA só para dar vida ao site. Trocar pelos modelos reais da loja.
   {
     id: "scooter-retro",

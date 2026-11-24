@@ -53,3 +53,11 @@ test.each(Object.entries(nprimeOficial))("NPrime %s: ficha técnica idêntica à
   expect(m.foto).toBe(`/nprime/${id}.jpg`);
   expect(m.preco).toBeUndefined();
 });
+
+test("New Bike 1000W: preço promocional vindo do story da loja", () => {
+  const m = modelos.find((x) => x.id === "new-bike")!;
+  expect(m.nome).toBe("New Bike 1000W");
+  expect(m.preco).toBe("R$ 6.900,00 à vista (de R$ 7.200,00)");
+  expect(m.specs).toEqual([{ rotulo: "Motor", valor: "1000W" }]);
+  expect(m.foto).toBe("/fotos/new-bike-promo.jpg");
+});

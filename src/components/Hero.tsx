@@ -1,146 +1,272 @@
+"use client";
+
+import Image from "next/image";
+import { useEffect, useState, type ReactNode } from "react";
 import { BotaoWhatsApp } from "./BotaoWhatsApp";
 import { site } from "@/content/site";
 
-const particulas = Array.from({ length: 14 }, (_, i) => ({
-  left: `${(i * 37 + 11) % 100}%`,
-  size: 3 + (i % 4) * 2,
-  delay: `${(i * 0.9) % 7}s`,
-  duration: `${7 + (i % 5) * 1.6}s`,
-}));
+const INTERVALO_MS = 6000;
 
-const rastros = [
-  { top: "26%", width: "220px", delay: "0s", duration: "2.6s" },
-  { top: "38%", width: "150px", delay: "0.9s", duration: "2.1s" },
-  { top: "52%", width: "260px", delay: "0.4s", duration: "3s" },
-  { top: "64%", width: "180px", delay: "1.4s", duration: "2.4s" },
-  { top: "72%", width: "120px", delay: "0.2s", duration: "1.9s" },
+type Foto = { src: string; alt: string; selo?: string };
+
+function Selo({ children }: { children: ReactNode }) {
+  return (
+    <span className="absolute left-3 top-3 z-10 rounded-full bg-black/70 px-3 py-1 text-xs font-medium backdrop-blur">
+      {children}
+    </span>
+  );
+}
+
+function Kicker({ children }: { children: ReactNode }) {
+  return <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand">{children}</p>;
+}
+
+function Botao({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <a
+      href={href}
+      className="inline-flex items-center justify-center rounded-full border border-white/25 px-6 py-3 font-semibold text-white transition hover:border-brand hover:text-brand"
+    >
+      {children}
+    </a>
+  );
+}
+
+/** Slide padrão: texto à esquerda, foto em moldura à direita. */
+function SlideFoto({
+  kicker,
+  titulo,
+  texto,
+  foto,
+  acoes,
+}: {
+  kicker: string;
+  titulo: string;
+  texto: string;
+  foto: Foto;
+  acoes: ReactNode;
+}) {
+  return (
+    <div className="grid items-center gap-8 md:grid-cols-2">
+      <div className="order-2 md:order-1">
+        <Kicker>{kicker}</Kicker>
+        <h2 className="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">{titulo}</h2>
+        <p className="mt-4 max-w-md text-lg text-white/75">{texto}</p>
+        <div className="mt-6 flex flex-wrap gap-3">{acoes}</div>
+      </div>
+      <figure className="relative order-1 mx-auto aspect-[4/3] w-full max-w-md overflow-hidden md:max-w-[21rem] rounded-3xl border border-white/10 shadow-2xl shadow-black/60 md:order-2 md:aspect-[4/5]">
+        <Image src={foto.src} alt={foto.alt} fill priority={false} className="object-cover" sizes="(min-width: 768px) 336px, 100vw" />
+        {foto.selo && <Selo>{foto.selo}</Selo>}
+      </figure>
+    </div>
+  );
+}
+
+function CartaoOferta({
+  foto,
+  nome,
+  de,
+  por,
+  selo,
+  inclinacao,
+}: {
+  foto: Foto;
+  nome: string;
+  de?: string;
+  por: string;
+  selo?: string;
+  inclinacao: string;
+}) {
+  return (
+    <div
+      className={`relative overflow-hidden rounded-2xl border-2 border-brand/60 bg-black shadow-[0_20px_50px_-10px_rgba(34,197,94,0.35)] ${inclinacao}`}
+    >
+      <div className="relative aspect-[4/5] sm:aspect-square">
+        <Image src={foto.src} alt={foto.alt} fill className="object-cover" sizes="(min-width: 768px) 240px, 45vw" />
+        {selo && <Selo>{selo}</Selo>}
+      </div>
+      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/85 to-transparent px-3 pb-3 pt-10 text-center">
+        <p className="text-xs font-bold uppercase tracking-wider text-white/80">{nome}</p>
+        {de && <p className="text-xs text-white/60 line-through">de {de}</p>}
+        <p className="text-2xl font-black text-brand sm:text-3xl">{por}</p>
+        <p className="text-[11px] font-semibold uppercase text-white/70">à vista</p>
+      </div>
+    </div>
+  );
+}
+
+/** Banner de campanha, no estilo das promoções de loja: palco escuro, título grande e duas motos com preço. */
+function SlideBlack() {
+  return (
+    <div className="grid items-center gap-8 md:grid-cols-[1.05fr_1fr]">
+      <div>
+        <span className="inline-block -skew-x-12 border border-brand bg-black px-4 py-1 text-sm font-extrabold uppercase tracking-widest text-brand">
+          Já começou
+        </span>
+        <h1 className="mt-4 font-black uppercase italic leading-[0.88] tracking-tight [filter:drop-shadow(0_4px_0_#14532d)_drop-shadow(0_0_26px_rgba(34,197,94,0.3))]">
+          <span className="block bg-gradient-to-b from-white to-zinc-400 bg-clip-text text-6xl text-transparent sm:text-7xl lg:text-8xl">Black</span>{" "}
+          <span className="block text-3xl text-brand sm:text-5xl lg:text-6xl">da E-VOLT</span>
+        </h1>
+        <p className="mt-5 max-w-md text-lg text-white/80">
+          Ofertas especiais em motos elétricas. Garanta a sua antes que acabe o estoque.
+        </p>
+        <div className="mt-6">
+          <BotaoWhatsApp>Aproveitar no WhatsApp</BotaoWhatsApp>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-4 px-1 sm:gap-6">
+        <CartaoOferta
+          foto={{ src: "/fotos/new-bike-promo.jpg", alt: "Duas New Bike 1000W, uma vermelha e uma verde, na loja E-VOLT" }}
+          nome="New Bike 1000W"
+          de="R$ 7.200"
+          por="R$ 6.900"
+          inclinacao="-rotate-2"
+        />
+        <CartaoOferta
+          foto={{ src: "/ia/x20-citycoco.jpg", alt: "Moto elétrica X20 estilo citycoco vinho" }}
+          nome="X20 · 1000W"
+          por="R$ 9.900"
+          selo="Imagem ilustrativa (IA)"
+          inclinacao="mt-6 rotate-2"
+        />
+      </div>
+    </div>
+  );
+}
+
+const slides: { chave: string; conteudo: ReactNode }[] = [
+  { chave: "black", conteudo: <SlideBlack /> },
+  {
+    chave: "nprime",
+    conteudo: (
+      <SlideFoto
+        kicker="Ficha técnica completa"
+        titulo="Linha NPrime Motor: 8 modelos para o seu dia a dia"
+        texto="De 500W a 1000W e autonomia de até 90 km (Brutal). Confira motor, bateria, peso e dimensões de cada modelo."
+        foto={{ src: "/nprime/brutal.jpg", alt: "NPrime Brutal vermelha e preta em showroom", selo: "Foto do fabricante" }}
+        acoes={
+          <>
+            <BotaoWhatsApp>Falar no WhatsApp</BotaoWhatsApp>
+            <Botao href="#modelos">Ver modelos</Botao>
+          </>
+        }
+      />
+    ),
+  },
+  {
+    chave: "parcelamento",
+    conteudo: (
+      <SlideFoto
+        kicker="O futuro da mobilidade chegou!"
+        titulo="Economia, praticidade e liberdade."
+        texto="Troque o posto de gasolina pela tomada e parcele a sua moto elétrica."
+        foto={{
+          src: "/ia/lifestyle.jpg",
+          alt: "Jovem sorridente pilotando uma scooter elétrica retrô branca em uma rua de cidade do interior",
+          selo: "Imagem ilustrativa (IA)",
+        }}
+        acoes={
+          <>
+            <BotaoWhatsApp>Simular no WhatsApp</BotaoWhatsApp>
+            <Botao href="#parcelamento">Ver condições</Botao>
+          </>
+        }
+      />
+    ),
+  },
+  {
+    chave: "loja",
+    conteudo: (
+      <SlideFoto
+        kicker="Visite a loja"
+        titulo="Venha conhecer a E-VOLT em Bom Jesus"
+        texto={`${site.endereco} · ${site.referencia}.`}
+        foto={{ src: "/ia/scooter-retro.jpg", alt: "Scooter elétrica retrô branca em loja moderna", selo: "Imagem ilustrativa (IA)" }}
+        acoes={
+          <>
+            <Botao href="#endereco">Como chegar</Botao>
+            <BotaoWhatsApp>Falar no WhatsApp</BotaoWhatsApp>
+          </>
+        }
+      />
+    ),
+  },
 ];
 
-const raios = [0, 60, 120, 180, 240, 300];
-
-function Roda({ cx, cy }: { cx: number; cy: number }) {
-  return (
-    <g>
-      <circle cx={cx} cy={cy} r="62" fill="#0b0b0b" stroke="#1f1f1f" strokeWidth="14" />
-      <circle cx={cx} cy={cy} r="50" fill="none" stroke="#22c55e" strokeWidth="3" opacity=".8" />
-      <g className="ev-spin" style={{ transformOrigin: `${cx}px ${cy}px` }}>
-        {raios.map((a) => (
-          <line
-            key={a}
-            x1={cx}
-            y1={cy}
-            x2={cx + 46 * Math.cos((a * Math.PI) / 180)}
-            y2={cy + 46 * Math.sin((a * Math.PI) / 180)}
-            stroke="#22c55e"
-            strokeWidth="3"
-            strokeLinecap="round"
-            opacity=".7"
-          />
-        ))}
-      </g>
-      <circle cx={cx} cy={cy} r="9" fill="#22c55e" />
-    </g>
-  );
-}
-
-function Scooter() {
-  return (
-    <svg
-      viewBox="0 0 520 340"
-      role="img"
-      aria-label="Ilustração de uma scooter elétrica em movimento"
-      className="ev-bob relative z-10 w-full max-w-xl drop-shadow-[0_0_30px_rgba(34,197,94,0.35)]"
-    >
-      <defs>
-        <radialGradient id="ev-luz" cx="0" cy="0.5" r="1">
-          <stop offset="0" stopColor="#22c55e" stopOpacity=".65" />
-          <stop offset="1" stopColor="#22c55e" stopOpacity="0" />
-        </radialGradient>
-        <linearGradient id="ev-corpo" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#262626" />
-          <stop offset="1" stopColor="#101010" />
-        </linearGradient>
-      </defs>
-      <polygon className="ev-pulse" points="410,108 520,40 520,190" fill="url(#ev-luz)" />
-      <ellipse cx="260" cy="318" rx="210" ry="12" fill="#22c55e" opacity=".18" />
-      <Roda cx={120} cy={250} />
-      <Roda cx={400} cy={250} />
-      <path d="M62 205 C70 140 150 118 212 140 L238 218 L122 218 C88 218 62 214 62 205 Z" fill="url(#ev-corpo)" stroke="#22c55e" strokeOpacity=".7" strokeWidth="2" />
-      <rect x="168" y="214" width="172" height="26" rx="13" fill="#161616" stroke="#22c55e" strokeOpacity=".7" strokeWidth="2" />
-      <path d="M112 134 C148 112 222 112 248 134 L244 152 L120 152 Z" fill="#2c2c2c" stroke="#22c55e" strokeOpacity=".5" strokeWidth="2" />
-      <path d="M336 218 L372 100 L394 106 L362 222 Z" fill="url(#ev-corpo)" stroke="#22c55e" strokeOpacity=".7" strokeWidth="2" />
-      <path d="M338 84 L398 92" stroke="#e5e5e5" strokeWidth="8" strokeLinecap="round" />
-      <path d="M338 218 C352 172 444 172 458 218" fill="none" stroke="#22c55e" strokeWidth="6" strokeLinecap="round" />
-      <circle className="ev-pulse" cx="399" cy="112" r="14" fill="#22c55e" />
-      <polygon className="ev-bolt" points="168,168 190,168 178,188 198,188 160,230 170,196 150,196" fill="#22c55e" />
-    </svg>
-  );
-}
-
 export function Hero() {
-  return (
-    <section className="ev-hero relative isolate min-h-[100svh] overflow-hidden bg-black">
-      <div className="ev-aurora absolute inset-0 -z-30" aria-hidden="true" />
+  const total = slides.length;
+  const [atual, setAtual] = useState(0);
+  const [pausado, setPausado] = useState(false);
 
-      <div className="ev-particles absolute inset-0 -z-20" aria-hidden="true">
-        {particulas.map((p, i) => (
-          <span
-            key={i}
-            className="ev-particle"
-            style={{
-              left: p.left,
-              width: p.size,
-              height: p.size,
-              animationDelay: p.delay,
-              animationDuration: p.duration,
-            }}
-          />
+  const mover = (delta: number) => setAtual((a) => (((a + delta) % total) + total) % total);
+  const ir = (i: number) => setAtual(((i % total) + total) % total);
+
+  useEffect(() => {
+    const menosMovimento = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (pausado || menosMovimento) return;
+    const id = setInterval(() => mover(1), INTERVALO_MS);
+    return () => clearInterval(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pausado, atual]);
+
+  return (
+    <section
+      aria-roledescription="carrossel"
+      aria-label="Banners promocionais"
+      onMouseEnter={() => setPausado(true)}
+      onMouseLeave={() => setPausado(false)}
+      onFocus={() => setPausado(true)}
+      onBlur={() => setPausado(false)}
+      className="relative isolate overflow-hidden bg-[#070707] bg-[radial-gradient(ellipse_70%_60%_at_75%_40%,rgba(34,197,94,0.16),transparent_65%)]"
+    >
+      <div className="grid">
+        {slides.map((s, i) => (
+          <div
+            key={s.chave}
+            data-slide
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`Banner ${i + 1} de ${total}`}
+            aria-hidden={i !== atual ? "true" : "false"}
+            inert={i !== atual}
+            className={`col-start-1 row-start-1 mx-auto flex w-full max-w-6xl items-center px-4 pb-16 pt-28 transition-all duration-700 sm:px-6 ${
+              i === atual ? "translate-x-0 opacity-100" : "pointer-events-none translate-x-6 opacity-0"
+            }`}
+          >
+            <div className="w-full">{s.conteudo}</div>
+          </div>
         ))}
       </div>
 
-      <div className="ev-road absolute inset-x-0 bottom-0 -z-10 h-[42%]" aria-hidden="true" />
-
-      <div className="relative z-20 mx-auto grid min-h-[100svh] w-full max-w-6xl items-center gap-10 px-4 pb-16 pt-32 sm:px-6 md:grid-cols-2">
-        <div>
-          <p className="ev-in mb-4 text-sm font-semibold uppercase tracking-widest text-brand" style={{ animationDelay: "0.1s" }}>
-            {site.nome} · {site.cidade}
-          </p>
-          <h1 className="ev-in text-3xl font-extrabold leading-tight sm:text-4xl lg:text-5xl" style={{ animationDelay: "0.25s" }}>
-            O futuro da mobilidade chegou!{" "}
-            <span className="text-brand">Economia, praticidade e liberdade.</span>
-          </h1>
-          <p className="ev-in mt-4 max-w-xl text-lg text-white/80" style={{ animationDelay: "0.45s" }}>
-            Motos elétricas para o seu dia a dia, direto de Bom Jesus – PI.
-          </p>
-          <ul className="ev-in mt-4 flex flex-wrap gap-2" style={{ animationDelay: "0.6s" }}>
-            {["Economia", "Praticidade", "Liberdade"].map((t) => (
-              <li key={t} className="rounded-full border border-brand/40 bg-brand/10 px-4 py-1.5 text-sm font-medium text-brand">
-                {t}
-              </li>
-            ))}
-          </ul>
-          <div className="ev-in mt-6" style={{ animationDelay: "0.75s" }}>
-            <BotaoWhatsApp />
-          </div>
+      <div className="absolute inset-x-0 bottom-5 z-30 flex items-center justify-center gap-4">
+        <button
+          type="button"
+          onClick={() => mover(-1)}
+          aria-label="Banner anterior"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-xl backdrop-blur transition hover:bg-brand hover:text-black"
+        >
+          ‹
+        </button>
+        <div className="flex items-center gap-2">
+          {slides.map((s, i) => (
+            <button
+              key={s.chave}
+              type="button"
+              onClick={() => ir(i)}
+              aria-label={`Ir para o banner ${i + 1}`}
+              aria-current={i === atual ? "true" : undefined}
+              className={`h-2 rounded-full transition-all ${i === atual ? "w-8 bg-brand" : "w-2 bg-white/35 hover:bg-white/70"}`}
+            />
+          ))}
         </div>
-
-        <div className="relative flex items-center justify-center">
-          <div className="ev-rings absolute inset-0 flex items-center justify-center" aria-hidden="true">
-            <span className="ev-ring" style={{ animationDelay: "0s" }} />
-            <span className="ev-ring" style={{ animationDelay: "1.4s" }} />
-            <span className="ev-ring" style={{ animationDelay: "2.8s" }} />
-          </div>
-          <div className="ev-streaks absolute inset-0 overflow-hidden" aria-hidden="true">
-            {rastros.map((r, i) => (
-              <span
-                key={i}
-                className="ev-streak"
-                style={{ top: r.top, width: r.width, animationDelay: r.delay, animationDuration: r.duration }}
-              />
-            ))}
-          </div>
-          <Scooter />
-        </div>
+        <button
+          type="button"
+          onClick={() => mover(1)}
+          aria-label="Próximo banner"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-xl backdrop-blur transition hover:bg-brand hover:text-black"
+        >
+          ›
+        </button>
       </div>
     </section>
   );
