@@ -26,7 +26,7 @@ npm run build
 
 ## Conteúdo provisório (trocar antes de publicar)
 
-- `public/ia/`: imagens geradas por IA (Gemini) só para o site ficar interativo. Aparecem com o selo "Imagem ilustrativa (IA)". Substituir pelas fotos reais dos modelos da loja antes de publicar.
+- `public/ia/`: imagens geradas por IA (Gemini) (scooter retrô e cena de estilo de vida) só para o site ficar interativo. Aparecem com o selo "Imagem ilustrativa (IA)". Substituir pelas fotos reais dos modelos da loja antes de publicar.
 - Vídeos `loja.mp4` e `clientes.mp4`: reels da E-VOLT; confirmar autorização de imagem das pessoas que aparecem.
 
 - `public/nprime/`: fotos de 4 modelos (Brisa, Brutal, Q-Star II, Vast Universe) tiradas do site do fabricante **NPrime Motor** (nprimemotor.com.br), com selo "Foto do fabricante". Confirmar com a loja quais modelos ela vende e pedir autorização/kit de imprensa ao fabricante. Faltam Fuling, Impacto, Ling Yue e Trovão (ficha: Fuling/Impacto/Ling Yue/Trovão = 1000W, até 75 km, 150 kg).

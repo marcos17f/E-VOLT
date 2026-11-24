@@ -78,6 +78,8 @@ test("Parcelamento: título, WhatsApp e condição real do X20", () => {
   expect(screen.getByRole("heading", { name: /parcelamento/i })).toBeInTheDocument();
   expect(screen.getByRole("link", { name: /whatsapp/i })).toBeInTheDocument();
   expect(container.textContent).toContain("12x de R$ 938,00 sem juros");
+  expect(screen.getByRole("img", { name: /jovem.*scooter/i })).toBeInTheDocument();
+  expect(screen.getByText(/imagem ilustrativa \(IA\)/i)).toBeInTheDocument();
 });
 
 test("Loja: vídeo da fachada com controles e o que a loja vende", () => {
