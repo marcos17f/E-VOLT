@@ -62,73 +62,67 @@ function SlideFoto({
   );
 }
 
-function CartaoOferta({
-  foto,
-  nome,
-  de,
-  por,
-  selo,
-  inclinacao,
-}: {
-  foto: Foto;
-  nome: string;
-  de?: string;
-  por: string;
-  selo?: string;
-  inclinacao: string;
-}) {
+function Etiqueta({ nome, de, por, className }: { nome: string; de?: string; por: string; className: string }) {
   return (
     <div
-      className={`relative overflow-hidden rounded-2xl border-2 border-brand/60 bg-black shadow-[0_20px_50px_-10px_rgba(34,197,94,0.35)] ${inclinacao}`}
+      className={`absolute z-10 -skew-x-6 rounded-lg border-2 border-brand/70 bg-gradient-to-b from-[#0b2a16] to-black px-3 py-2 text-center shadow-[0_10px_30px_-6px_rgba(34,197,94,0.45)] sm:px-4 ${className}`}
     >
-      <div className="relative aspect-[4/5] sm:aspect-square">
-        <Image src={foto.src} alt={foto.alt} fill className="object-cover" sizes="(min-width: 768px) 240px, 45vw" />
-        {selo && <Selo>{selo}</Selo>}
-      </div>
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/85 to-transparent px-3 pb-3 pt-10 text-center">
-        <p className="text-xs font-bold uppercase tracking-wider text-white/80">{nome}</p>
-        {de && <p className="text-xs text-white/60 line-through">de {de}</p>}
-        <p className="text-2xl font-black text-brand sm:text-3xl">{por}</p>
-        <p className="text-[11px] font-semibold uppercase text-white/70">à vista</p>
-      </div>
+      <p className="text-[11px] font-extrabold uppercase tracking-wide text-white/85 sm:text-xs">{nome}</p>
+      {de && <p className="text-[11px] text-white/60 line-through">de {de}</p>}
+      <p className="text-2xl font-black italic leading-none text-brand sm:text-3xl">{por}</p>
+      <p className="text-[10px] font-semibold uppercase text-white/70">à vista</p>
     </div>
   );
 }
 
-/** Banner de campanha, no estilo das promoções de loja: palco escuro, título grande e duas motos com preço. */
+/** Banner de campanha: título em relevo, motos recortadas sobre o cenário e etiquetas de preço, como nas promoções de loja. */
 function SlideBlack() {
   return (
-    <div className="grid items-center gap-8 md:grid-cols-[1.05fr_1fr]">
+    <div className="grid items-center gap-6 md:grid-cols-[0.9fr_1.1fr]">
       <div>
-        <span className="inline-block -skew-x-12 border border-brand bg-black px-4 py-1 text-sm font-extrabold uppercase tracking-widest text-brand">
-          Já começou
-        </span>
-        <h1 className="mt-4 font-black uppercase italic leading-[0.88] tracking-tight [filter:drop-shadow(0_4px_0_#14532d)_drop-shadow(0_0_26px_rgba(34,197,94,0.3))]">
-          <span className="block bg-gradient-to-b from-white to-zinc-400 bg-clip-text text-6xl text-transparent sm:text-7xl lg:text-8xl">Black</span>{" "}
-          <span className="block text-3xl text-brand sm:text-5xl lg:text-6xl">da E-VOLT</span>
+        <h1 className="font-black uppercase italic leading-[0.88] tracking-tight">
+          <span className="block bg-gradient-to-b from-white via-zinc-200 to-zinc-500 bg-clip-text text-6xl text-transparent [filter:drop-shadow(0_2px_0_#9ca3af)_drop-shadow(0_4px_0_#6b7280)_drop-shadow(0_6px_0_#374151)_drop-shadow(0_16px_18px_rgba(0,0,0,0.7))] sm:text-7xl lg:text-8xl">
+            Black
+          </span>{" "}
+          <span className="block bg-gradient-to-b from-lime-300 to-brand bg-clip-text text-4xl text-transparent [filter:drop-shadow(0_2px_0_#15803d)_drop-shadow(0_4px_0_#166534)_drop-shadow(0_6px_0_#14532d)_drop-shadow(0_0_24px_rgba(34,197,94,0.55))] sm:text-6xl lg:text-7xl">
+            da E-VOLT
+          </span>
         </h1>
-        <p className="mt-5 max-w-md text-lg text-white/80">
-          Ofertas especiais em motos elétricas. Garanta a sua antes que acabe o estoque.
-        </p>
-        <div className="mt-6">
-          <BotaoWhatsApp>Aproveitar no WhatsApp</BotaoWhatsApp>
-        </div>
+        <a
+          href={site.whatsapp}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-6 inline-block rounded-xl border border-white/15 bg-black/85 px-5 py-3 shadow-xl transition hover:border-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        >
+          <span className="block text-2xl font-black uppercase italic text-white">Já começou</span>
+          <span className="block text-xs font-medium text-white/80">
+            Quero aproveitar a Black da E-VOLT <span className="font-bold text-brand">&gt;&gt;&gt;&gt;&gt;</span>
+          </span>
+        </a>
       </div>
-      <div className="grid grid-cols-2 gap-4 px-1 sm:gap-6">
-        <CartaoOferta
-          foto={{ src: "/fotos/new-bike-promo.jpg", alt: "Duas New Bike 1000W, uma vermelha e uma verde, na loja E-VOLT" }}
-          nome="New Bike 1000W"
-          de="R$ 7.200"
-          por="R$ 6.900"
-          inclinacao="-rotate-2"
+
+      <div className="relative mx-auto h-[20rem] w-full max-w-xl sm:h-[25rem] md:max-w-none lg:h-[28rem]">
+        <Image
+          src="/fotos/new-bike-recorte.webp"
+          alt="Duas New Bike 1000W, uma vermelha e uma verde, na loja E-VOLT"
+          width={738}
+          height={623}
+          className="absolute bottom-6 left-0 h-auto w-[50%] drop-shadow-[0_18px_22px_rgba(0,0,0,0.65)]"
+          sizes="(min-width: 768px) 280px, 45vw"
         />
-        <CartaoOferta
-          foto={{ src: "/ia/x20-citycoco.jpg", alt: "Moto elétrica X20 estilo citycoco vinho" }}
-          nome="X20 · 1000W"
-          por="R$ 9.900"
-          selo="Imagem ilustrativa (IA)"
-          inclinacao="mt-6 rotate-2"
+        <Image
+          src="/ia/x20-recorte.webp"
+          alt="Moto elétrica X20 estilo citycoco vinho"
+          width={907}
+          height={835}
+          className="absolute bottom-10 right-0 h-auto w-[56%] drop-shadow-[0_18px_22px_rgba(0,0,0,0.65)]"
+          sizes="(min-width: 768px) 320px, 50vw"
         />
+        <Etiqueta nome="New Bike 1000W" de="R$ 7.200" por="R$ 6.900" className="bottom-0 left-[4%]" />
+        <Etiqueta nome="X20 · 1000W" por="R$ 9.900" className="bottom-0 right-[6%]" />
+        <span className="absolute right-0 top-0 z-10 rounded-full bg-black/70 px-3 py-1 text-xs font-medium backdrop-blur">
+          Imagem ilustrativa (IA) · X20
+        </span>
       </div>
     </div>
   );

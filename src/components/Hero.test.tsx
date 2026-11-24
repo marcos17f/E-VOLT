@@ -30,6 +30,18 @@ test("Hero: banner Black mostra as duas motos com os preços da loja", () => {
   expect(black.querySelectorAll("img")).toHaveLength(2);
 });
 
+test("Hero: banner Black tem as motos recortadas sobre o cenário e a chamada 'Já começou' para o WhatsApp", () => {
+  const { container } = render(<Hero />);
+  const black = container.querySelector("[data-slide]")!;
+  const srcs = [...black.querySelectorAll("img")].map((i) => decodeURIComponent(i.getAttribute("src") ?? ""));
+  expect(srcs.some((s) => s.includes("new-bike-recorte"))).toBe(true);
+  expect(srcs.some((s) => s.includes("x20-recorte"))).toBe(true);
+  const chamada = [...black.querySelectorAll("a")].find((a) => /quero aproveitar a black da e-volt/i.test(a.textContent ?? ""));
+  expect(chamada).toBeTruthy();
+  expect(chamada).toHaveAttribute("href", site.whatsapp);
+  expect(black.textContent).toMatch(/já começou/i);
+});
+
 test("Hero: 4 banners promocionais", () => {
   const { container } = render(<Hero />);
   expect(container.querySelectorAll("[data-slide]")).toHaveLength(4);
