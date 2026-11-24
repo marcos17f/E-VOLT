@@ -49,13 +49,17 @@ test("Modelos: card provisório aparece como imagem ilustrativa (IA), sem preço
   expect(screen.getAllByText(/imagem ilustrativa/i)).toHaveLength(1);
 });
 
-test("Modelos: linha NPrime Motor com ficha e selo de foto do fabricante", () => {
-  render(<Modelos />);
-  for (const nome of ["Brisa", "Brutal", "Q-Star II", "Vast Universe"]) {
+test("Modelos: linha NPrime Motor completa, com selo e ficha técnica", () => {
+  const { container } = render(<Modelos />);
+  for (const nome of ["Brisa", "Brutal", "Fuling", "Impacto", "Ling Yue", "Q-Star II", "Trovão", "Vast Universe"]) {
     expect(screen.getByRole("heading", { name: nome })).toBeInTheDocument();
   }
   expect(screen.getAllByText("até 90 km")).toHaveLength(1);
-  expect(screen.getAllByText(/foto do fabricante/i)).toHaveLength(4);
+  expect(screen.getAllByText(/foto do fabricante/i)).toHaveLength(8);
+  expect(container.querySelectorAll("details")).toHaveLength(8);
+  expect(screen.getAllByText(/ficha técnica completa/i)).toHaveLength(8);
+  expect(screen.getByText("72 V · 35 Ah")).toBeInTheDocument();
+  expect(screen.getByText("1.920 × 770 × 1.160 mm")).toBeInTheDocument();
 });
 
 test("Duvidas: perguntas sobre CNH, autonomia, parcelamento e endereço", () => {

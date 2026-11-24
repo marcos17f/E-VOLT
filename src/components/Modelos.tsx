@@ -55,6 +55,25 @@ function CardModelo({ m }: { m: Modelo }) {
               ))}
             </dl>
           )}
+          {m.fichaCompleta && (
+            <details className="group rounded-xl border border-white/10 px-4 py-3 text-sm">
+              <summary className="flex cursor-pointer list-none items-center justify-between font-semibold">
+                Ficha técnica completa
+                <span className="text-brand transition group-open:rotate-45" aria-hidden="true">+</span>
+              </summary>
+              <dl className="mt-3 divide-y divide-white/10">
+                {m.fichaCompleta.map((s) => (
+                  <div key={s.rotulo} className="flex justify-between gap-4 py-2">
+                    <dt className="text-white/50">{s.rotulo}</dt>
+                    <dd className="text-right font-medium">{s.valor}</dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="mt-3 text-xs text-white/40">
+                Dados do fabricante. A autonomia varia conforme percurso, carga e condições de uso.
+              </p>
+            </details>
+          )}
           {(m.parcelamento || m.preco) && (
             <div className="rounded-2xl border border-brand/30 bg-black/40 p-4">
               {m.parcelamento && <p className="text-xl font-bold text-brand">{m.parcelamento}</p>}
