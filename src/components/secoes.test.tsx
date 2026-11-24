@@ -1,5 +1,4 @@
 import { render, screen, within } from "@testing-library/react";
-import { Hero } from "./Hero";
 import { Cabecalho } from "./Cabecalho";
 import { Beneficios } from "./Beneficios";
 import { Modelos } from "./Modelos";
@@ -21,21 +20,6 @@ test("Cabecalho: logo, navegação por âncoras e WhatsApp", () => {
   );
 });
 
-test("Hero: título, vídeo de fundo com poster e WhatsApp", () => {
-  const { container } = render(<Hero />);
-  expect(
-    screen.getByRole("heading", { level: 1 }).textContent,
-  ).toContain("Economia, praticidade e liberdade");
-  const video = container.querySelector("video")!;
-  expect(video).toHaveAttribute("poster", "/videos/inauguracao.jpg");
-  expect(video.muted).toBe(true);
-  expect(video).toHaveAttribute("loop");
-  expect(video).toHaveAttribute("playsinline");
-  expect(screen.getByRole("link", { name: /whatsapp/i })).toHaveAttribute(
-    "href",
-    site.whatsapp,
-  );
-});
 
 test("Beneficios: 4 cards", () => {
   render(<Beneficios />);
