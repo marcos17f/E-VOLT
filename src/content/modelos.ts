@@ -6,11 +6,26 @@ export type Modelo = {
   parcelamento?: string;
   specs?: { rotulo: string; valor: string }[];
   destaques?: string[];
-  ilustrativa?: boolean; // imagem provisória gerada por IA, trocar pela foto real da loja
+  selo?: string; // indica imagem provisória (IA ou foto do fabricante), trocar pela foto real da loja
 };
 
 // Dados do X20 copiados do anúncio oficial da E-VOLT no Instagram (29/10/2026).
 // Preços podem mudar: confirmar com o cliente antes de publicar. Novos modelos entram aqui.
+function nprime(id: string, nome: string, motor: string, autonomia: string, capacidade: string): Modelo {
+  return {
+    id,
+    nome,
+    foto: `/nprime/${id}.jpg`,
+    selo: "Foto do fabricante",
+    specs: [
+      { rotulo: "Motor", valor: motor },
+      { rotulo: "Autonomia", valor: autonomia },
+      { rotulo: "Capacidade", valor: capacidade },
+      { rotulo: "Fabricante", valor: "NPrime Motor" },
+    ],
+  };
+}
+
 export const modelos: Modelo[] = [
   {
     id: "x20",
@@ -33,6 +48,12 @@ export const modelos: Modelo[] = [
     id: "scooter-retro",
     nome: "Scooter retrô",
     foto: "/ia/scooter-retro.jpg",
-    ilustrativa: true,
+    selo: "Imagem ilustrativa (IA)",
   },
+  // Linha NPrime Motor (fabricante visto nas fotos e reels da loja). Fichas e fotos do site
+  // nprimemotor.com.br; confirmar com a loja quais modelos estão disponíveis.
+  nprime("brisa", "Brisa", "500W", "até 40 km", "até 120 kg"),
+  nprime("brutal", "Brutal", "1000W", "até 90 km", "até 150 kg"),
+  nprime("q-star-ii", "Q-Star II", "650W", "até 55 km", "até 150 kg"),
+  nprime("vast-universe", "Vast Universe", "1000W", "até 75 km", "até 150 kg"),
 ];

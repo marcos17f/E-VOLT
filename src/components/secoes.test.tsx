@@ -39,7 +39,7 @@ test("Modelos: padrão mostra o X20 com preço, parcelamento e especificações"
   expect(screen.getByRole("heading", { name: "X20" })).toBeInTheDocument();
   expect(screen.getByText("R$ 9.900,00 à vista")).toBeInTheDocument();
   expect(screen.getByText("12x de R$ 938,00 sem juros")).toBeInTheDocument();
-  expect(screen.getByText("1000W")).toBeInTheDocument();
+  expect(screen.getAllByText("1000W").length).toBeGreaterThanOrEqual(1);
   expect(screen.getByText("55 a 63 km")).toBeInTheDocument();
 });
 
@@ -47,6 +47,15 @@ test("Modelos: card provisório aparece como imagem ilustrativa (IA), sem preço
   render(<Modelos />);
   expect(screen.getByRole("heading", { name: "Scooter retrô" })).toBeInTheDocument();
   expect(screen.getAllByText(/imagem ilustrativa/i)).toHaveLength(1);
+});
+
+test("Modelos: linha NPrime Motor com ficha e selo de foto do fabricante", () => {
+  render(<Modelos />);
+  for (const nome of ["Brisa", "Brutal", "Q-Star II", "Vast Universe"]) {
+    expect(screen.getByRole("heading", { name: nome })).toBeInTheDocument();
+  }
+  expect(screen.getAllByText("até 90 km")).toHaveLength(1);
+  expect(screen.getAllByText(/foto do fabricante/i)).toHaveLength(4);
 });
 
 test("Duvidas: perguntas sobre CNH, autonomia, parcelamento e endereço", () => {

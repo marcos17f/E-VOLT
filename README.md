@@ -29,11 +29,13 @@ npm run build
 - `public/ia/`: imagens geradas por IA (Gemini) só para o site ficar interativo. Aparecem com o selo "Imagem ilustrativa (IA)". Substituir pelas fotos reais dos modelos da loja antes de publicar.
 - Vídeos do carrossel (`public/videos/hero-*.mp4`): reels da E-VOLT que mostram clientes e lojas de terceiros; confirmar autorização de imagem.
 
+- `public/nprime/`: fotos de 4 modelos (Brisa, Brutal, Q-Star II, Vast Universe) tiradas do site do fabricante **NPrime Motor** (nprimemotor.com.br), com selo "Foto do fabricante". Confirmar com a loja quais modelos ela vende e pedir autorização/kit de imprensa ao fabricante. Faltam Fuling, Impacto, Ling Yue e Trovão (ficha: Fuling/Impacto/Ling Yue/Trovão = 1000W, até 75 km, 150 kg).
+
 ## Pendências com o cliente
 
 - Horário de funcionamento.
 - Demais modelos, fotos e preços (hoje só o X20 está no catálogo).
-- Marca/fabricante dos modelos e fotos oficiais do fabricante (não identificamos a marca pelo Instagram).
+- Confirmar fabricante e lista de modelos vendidos (NPrime Motor aparece em fotos e reels; os modelos X20 e Paris não constam no site da NPrime).
 - Condições de parcelamento dos outros modelos.
 - Domínio.
 - Autorização de uso de imagem das pessoas nas fotos de clientes e dos vídeos do Instagram.

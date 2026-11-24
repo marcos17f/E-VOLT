@@ -31,3 +31,23 @@ test("X20 tem os dados exatos do anúncio oficial", () => {
   expect(specs["Velocidade máxima"]).toBe("até 32 km/h");
   expect(specs["Capacidade"]).toBe("até 220 kg");
 });
+
+test("modelos NPrime Motor têm a ficha oficial do site do fabricante", () => {
+  const esperado: Record<string, [string, string, string]> = {
+    brisa: ["500W", "até 40 km", "até 120 kg"],
+    brutal: ["1000W", "até 90 km", "até 150 kg"],
+    "q-star-ii": ["650W", "até 55 km", "até 150 kg"],
+    "vast-universe": ["1000W", "até 75 km", "até 150 kg"],
+  };
+  for (const [id, [motor, autonomia, capacidade]] of Object.entries(esperado)) {
+    const m = modelos.find((x) => x.id === id)!;
+    expect(m, id).toBeDefined();
+    const specs = Object.fromEntries(m.specs!.map((sp) => [sp.rotulo, sp.valor]));
+    expect(specs["Motor"]).toBe(motor);
+    expect(specs["Autonomia"]).toBe(autonomia);
+    expect(specs["Capacidade"]).toBe(capacidade);
+    expect(specs["Fabricante"]).toBe("NPrime Motor");
+    expect(m.foto).toBe(`/nprime/${id}.jpg`);
+    expect(m.preco).toBeUndefined();
+  }
+});

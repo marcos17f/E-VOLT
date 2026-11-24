@@ -8,7 +8,7 @@ const reservados: Modelo[] = [1, 2, 3].map((n) => ({
 }));
 
 function CardModelo({ m }: { m: Modelo }) {
-  const completo = Boolean(m.specs?.length);
+  const completo = Boolean(m.destaques?.length);
   return (
     <li
       className={`overflow-hidden rounded-3xl border border-white/10 bg-surface ${
@@ -28,9 +28,9 @@ function CardModelo({ m }: { m: Modelo }) {
           ) : (
             <span className="text-4xl" aria-hidden="true">⚡</span>
           )}
-          {m.ilustrativa && (
+          {m.selo && (
             <span className="absolute left-3 top-3 rounded-full bg-black/70 px-3 py-1 text-xs font-medium">
-              Imagem ilustrativa (IA)
+              {m.selo}
             </span>
           )}
         </div>
@@ -46,7 +46,7 @@ function CardModelo({ m }: { m: Modelo }) {
             </ul>
           )}
           {m.specs && (
-            <dl className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
+            <dl className={`grid gap-x-4 gap-y-3 text-sm ${completo ? "grid-cols-2" : "grid-cols-2 sm:grid-cols-1"}`}>
               {m.specs.map((s) => (
                 <div key={s.rotulo}>
                   <dt className="text-white/50">{s.rotulo}</dt>
