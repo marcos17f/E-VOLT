@@ -30,7 +30,7 @@ function CardModelo({ m }: { m: Modelo }) {
           )}
           {m.ilustrativa && (
             <span className="absolute left-3 top-3 rounded-full bg-black/70 px-3 py-1 text-xs font-medium">
-              Foto ilustrativa
+              Imagem ilustrativa (IA)
             </span>
           )}
         </div>

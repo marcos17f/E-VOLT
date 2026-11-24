@@ -6,7 +6,7 @@ export type Modelo = {
   parcelamento?: string;
   specs?: { rotulo: string; valor: string }[];
   destaques?: string[];
-  ilustrativa?: boolean; // foto provisória de catálogo, trocar pela foto real da loja
+  ilustrativa?: boolean; // imagem provisória gerada por IA, trocar pela foto real da loja
 };
 
 // Dados do X20 copiados do anúncio oficial da E-VOLT no Instagram (29/10/2026).
@@ -28,11 +28,11 @@ export const modelos: Modelo[] = [
     ],
     destaques: ["Não paga IPVA", "Não gasta gasolina", "Não precisa de CNH"],
   },
-  // Espaço provisório: foto de catálogo de terceiros só para dar vida ao site. Trocar pelos modelos reais da loja.
+  // Espaço provisório: imagem gerada por IA só para dar vida ao site. Trocar pelos modelos reais da loja.
   {
-    id: "scooter-urbana",
-    nome: "Scooter urbana",
-    foto: "/ilustrativas/ph-vespa-1.jpg",
+    id: "scooter-retro",
+    nome: "Scooter retrô",
+    foto: "/ia/scooter-retro.jpg",
     ilustrativa: true,
   },
 ];

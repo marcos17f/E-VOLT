@@ -43,10 +43,10 @@ test("Modelos: padrão mostra o X20 com preço, parcelamento e especificações"
   expect(screen.getByText("55 a 63 km")).toBeInTheDocument();
 });
 
-test("Modelos: card provisório aparece como foto ilustrativa, sem preço nem ficha inventados", () => {
+test("Modelos: card provisório aparece como imagem ilustrativa (IA), sem preço nem ficha inventados", () => {
   render(<Modelos />);
-  expect(screen.getByRole("heading", { name: "Scooter urbana" })).toBeInTheDocument();
-  expect(screen.getAllByText(/foto ilustrativa/i)).toHaveLength(1);
+  expect(screen.getByRole("heading", { name: "Scooter retrô" })).toBeInTheDocument();
+  expect(screen.getAllByText(/imagem ilustrativa/i)).toHaveLength(1);
 });
 
 test("Duvidas: perguntas sobre CNH, autonomia, parcelamento e endereço", () => {

@@ -26,7 +26,7 @@ npm run build
 
 ## Conteúdo provisório (trocar antes de publicar)
 
-- `public/ilustrativas/`: foto de catálogo de terceiros (Mercado Livre) só para o site ficar interativo. Aparece com o selo "Foto ilustrativa". Substituir pelas fotos reais dos modelos da loja e **não publicar** com essa imagem.
+- `public/ia/`: imagens geradas por IA (Gemini) só para o site ficar interativo. Aparecem com o selo "Imagem ilustrativa (IA)". Substituir pelas fotos reais dos modelos da loja antes de publicar.
 - Vídeos do carrossel (`public/videos/hero-*.mp4`): reels da E-VOLT que mostram clientes e lojas de terceiros; confirmar autorização de imagem.
 
 ## Pendências com o cliente
