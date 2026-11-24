@@ -8,7 +8,7 @@ import { Clientes } from "@/components/Clientes";
 import { Duvidas } from "@/components/Duvidas";
 import { Endereco } from "@/components/Endereco";
 import { Rodape } from "@/components/Rodape";
-import { BotaoWhatsApp } from "@/components/BotaoWhatsApp";
+import { WhatsAppFlutuante } from "@/components/WhatsAppFlutuante";
 
 export default function Home() {
   return (
@@ -25,7 +25,7 @@ export default function Home() {
         <Endereco />
       </main>
       <Rodape />
-      <BotaoWhatsApp fixo />
+      <WhatsAppFlutuante />
     </>
   );
 }

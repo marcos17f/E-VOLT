@@ -19,13 +19,10 @@ test("a home compõe as seções na ordem da spec", () => {
   expect(screen.getByRole("contentinfo")).toBeInTheDocument();
 });
 
-test("há exatamente um botão de WhatsApp fixo", () => {
+test("há exatamente um botão flutuante que abre o menu de WhatsApp", () => {
   render(<Home />);
-  const fixos = screen
-    .getAllByRole("link", { name: /whatsapp/i })
-    .filter((a) => a.className.split(" ").includes("fixed"));
-  expect(fixos).toHaveLength(1);
-  expect(fixos[0]).toHaveAttribute("href", site.whatsapp);
+  expect(screen.getAllByRole("button", { name: /abrir opções de whatsapp/i })).toHaveLength(1);
+  expect(screen.queryByRole("dialog")).toBeNull();
 });
 
 test("nenhum link de WhatsApp aponta para URL diferente da constante", () => {

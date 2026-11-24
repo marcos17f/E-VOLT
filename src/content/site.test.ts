@@ -1,4 +1,4 @@
-import { site, beneficios } from "./site";
+import { site, beneficios, linkWhatsApp } from "./site";
 import { modelos } from "./modelos";
 
 test("links e slogan batem com a spec", () => {
@@ -60,4 +60,11 @@ test("New Bike 1000W: preço promocional vindo do story da loja", () => {
   expect(m.preco).toBe("R$ 6.900,00 à vista (de R$ 7.200,00)");
   expect(m.specs).toEqual([{ rotulo: "Motor", valor: "1000W" }]);
   expect(m.foto).toBe("/fotos/new-bike-promo.jpg");
+});
+
+test("linkWhatsApp monta o link do número da loja com a mensagem codificada", () => {
+  expect(site.whatsappNumero).toBe("5589981117097");
+  expect(linkWhatsApp("Olá! Quero um test ride.")).toBe(
+    "https://wa.me/5589981117097?text=Ol%C3%A1!%20Quero%20um%20test%20ride.",
+  );
 });

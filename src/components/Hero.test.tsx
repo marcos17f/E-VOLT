@@ -112,3 +112,13 @@ test("Hero: imagens de IA e de fabricante têm selo", () => {
   expect(screen.getAllByText(/imagem ilustrativa \(ia\)/i).length).toBeGreaterThanOrEqual(1);
   expect(screen.getAllByText(/foto do fabricante/i).length).toBeGreaterThanOrEqual(1);
 });
+
+test("Hero: fundo de campanha aparece só no banner Black", () => {
+  const { container } = render(<Hero />);
+  const fundo = container.querySelector("[data-fundo-black]")!;
+  expect(fundo).toHaveAttribute("data-ativo", "true");
+  fireEvent.click(pontos()[1]);
+  expect(fundo).toHaveAttribute("data-ativo", "false");
+  fireEvent.click(pontos()[0]);
+  expect(fundo).toHaveAttribute("data-ativo", "true");
+});

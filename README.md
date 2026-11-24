@@ -1,4 +1,4 @@
-# E-VOLT Mobilidade — Landing page
+﻿# E-VOLT Mobilidade — Landing page
 
 Landing de uma página da E-VOLT | Motos Elétricas (Bom Jesus – PI), feita para gerar contatos pelo WhatsApp. Conteúdo base: Instagram @evoltmobilidade.
 
@@ -31,7 +31,7 @@ npm run build
 
 - `public/nprime/`: fotos de 4 modelos (Brisa, Brutal, Q-Star II, Vast Universe) tiradas do site do fabricante **NPrime Motor** (nprimemotor.com.br), com selo "Foto do fabricante". Confirmar com a loja quais modelos ela vende e pedir autorização/kit de imprensa ao fabricante. Faltam Fuling, Impacto, Ling Yue e Trovão (ficha: Fuling/Impacto/Ling Yue/Trovão = 1000W, até 75 km, 150 kg).
 
-## Conferir antes de publicar
+## Botão flutuante de WhatsApp`n`nO botão verde no canto abre um menu com "Falar com atendente" e "Agendar test ride", que abrem o WhatsApp com a mensagem já escrita. Eles usam o número (89) 98111-7097 lido na fachada da loja (`site.whatsappNumero`), porque o link curto do perfil não aceita mensagem pré-preenchida. Confirmar com o cliente que é o número certo para agendamentos.`n`n## Conferir antes de publicar
 
 - **Parcela do X20 diverge:** o anúncio do feed diz "12x de R$ 938,00 sem juros" e o story diz "12x de R$ 983,30". O site usa R$ 938,00 (faixa do topo, parcelamento e dúvidas). Confirmar qual é o valor correto.
 - Banner Black: preços New Bike 1000W (de R$ 7.200 por R$ 6.900 à vista) e X20 (R$ 9.900 à vista) vêm dos stories da loja; confirmar validade da campanha.
@@ -49,3 +49,4 @@ npm run build
 ## Deploy
 
 Não publicado. O deploy para produção é feito pelo tech lead.
+
