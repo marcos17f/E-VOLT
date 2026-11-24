@@ -5,6 +5,7 @@ import { Modelos } from "./Modelos";
 import { Parcelamento } from "./Parcelamento";
 import { Loja } from "./Loja";
 import { Clientes } from "./Clientes";
+import { Duvidas } from "./Duvidas";
 import { Endereco } from "./Endereco";
 import { Rodape } from "./Rodape";
 import { site } from "@/content/site";
@@ -16,8 +17,9 @@ test("Cabecalho: logo, navegação por âncoras e WhatsApp", () => {
     .getAllByRole("link")
     .map((a) => a.getAttribute("href"));
   expect(hrefs).toEqual(
-    expect.arrayContaining(["#modelos", "#parcelamento", "#endereco", site.whatsapp]),
+    expect.arrayContaining(["#modelos", "#parcelamento", "#duvidas", "#endereco", site.whatsapp]),
   );
+  expect(header.textContent).toContain("12x de R$ 938,00 sem juros");
 });
 
 
@@ -39,6 +41,23 @@ test("Modelos: padrão mostra o X20 com preço, parcelamento e especificações"
   expect(screen.getByText("12x de R$ 938,00 sem juros")).toBeInTheDocument();
   expect(screen.getByText("1000W")).toBeInTheDocument();
   expect(screen.getByText("55 a 63 km")).toBeInTheDocument();
+});
+
+test("Modelos: card provisório aparece como foto ilustrativa, sem preço nem ficha inventados", () => {
+  render(<Modelos />);
+  expect(screen.getByRole("heading", { name: "Scooter urbana" })).toBeInTheDocument();
+  expect(screen.getAllByText(/foto ilustrativa/i)).toHaveLength(1);
+});
+
+test("Duvidas: perguntas sobre CNH, autonomia, parcelamento e endereço", () => {
+  const { container } = render(<Duvidas />);
+  expect(screen.getByRole("heading", { name: /dúvidas/i })).toBeInTheDocument();
+  const itens = container.querySelectorAll("details");
+  expect(itens.length).toBeGreaterThanOrEqual(5);
+  expect(container.textContent).toMatch(/CNH/);
+  expect(container.textContent).toContain("55 a 63 km");
+  expect(container.textContent).toContain("12x de R$ 938,00 sem juros");
+  expect(container.textContent).toContain("Rua Tabelião Raimundo José Rocha");
 });
 
 test("Parcelamento: título, WhatsApp e condição real do X20", () => {

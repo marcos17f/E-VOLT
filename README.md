@@ -24,6 +24,11 @@ npm run build
 - Instagram @evoltmobilidade: endereço (post de inauguração, 04/11/2026), telefone (fachada, vídeo da loja), preço e especificações do **X20** (anúncio de 29/10/2026), fotos de entrega, vídeos e logo (foto de perfil).
 - Os preços do X20 podem mudar: confirmar com o cliente antes de publicar.
 
+## Conteúdo provisório (trocar antes de publicar)
+
+- `public/ilustrativas/`: foto de catálogo de terceiros (Mercado Livre) só para o site ficar interativo. Aparece com o selo "Foto ilustrativa". Substituir pelas fotos reais dos modelos da loja e **não publicar** com essa imagem.
+- Vídeos do carrossel (`public/videos/hero-*.mp4`): reels da E-VOLT que mostram clientes e lojas de terceiros; confirmar autorização de imagem.
+
 ## Pendências com o cliente
 
 - Horário de funcionamento.

@@ -5,6 +5,7 @@ import { Modelos } from "@/components/Modelos";
 import { Parcelamento } from "@/components/Parcelamento";
 import { Loja } from "@/components/Loja";
 import { Clientes } from "@/components/Clientes";
+import { Duvidas } from "@/components/Duvidas";
 import { Endereco } from "@/components/Endereco";
 import { Rodape } from "@/components/Rodape";
 import { BotaoWhatsApp } from "@/components/BotaoWhatsApp";
@@ -20,6 +21,7 @@ export default function Home() {
         <Parcelamento />
         <Loja />
         <Clientes />
+        <Duvidas />
         <Endereco />
       </main>
       <Rodape />

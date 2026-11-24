@@ -12,6 +12,7 @@ test("a home compõe as seções na ordem da spec", () => {
     "parcelamento",
     "loja",
     "clientes",
+    "duvidas",
     "endereco",
   ]);
   expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();

@@ -69,7 +69,7 @@ export function Hero() {
 
       <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black via-black/55 to-black/30 md:bg-gradient-to-r md:from-black/85 md:via-black/45 md:to-transparent" />
 
-      <div className="relative z-20 mx-auto flex min-h-[100svh] w-full max-w-6xl items-center px-4 pb-28 pt-24 sm:px-6">
+      <div className="relative z-20 mx-auto flex min-h-[100svh] w-full max-w-6xl items-center px-4 pb-28 pt-32 sm:px-6">
         <div className="md:w-1/2">
           <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-brand">
             {site.nome} · {site.cidade}

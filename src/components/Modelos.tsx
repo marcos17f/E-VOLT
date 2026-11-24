@@ -28,6 +28,11 @@ function CardModelo({ m }: { m: Modelo }) {
           ) : (
             <span className="text-4xl" aria-hidden="true">⚡</span>
           )}
+          {m.ilustrativa && (
+            <span className="absolute left-3 top-3 rounded-full bg-black/70 px-3 py-1 text-xs font-medium">
+              Foto ilustrativa
+            </span>
+          )}
         </div>
         <div className="flex flex-col justify-center gap-4 p-6 sm:p-8">
           <h3 className="text-3xl font-extrabold">{m.nome}</h3>
