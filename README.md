@@ -19,14 +19,20 @@ npm run build
 - `public/videos/` — vídeos já recomprimidos (720p) e posters.
 - `src/components/` — uma seção por componente.
 
+## De onde veio o conteúdo
+
+- Instagram @evoltmobilidade: endereço (post de inauguração, 04/11/2026), telefone (fachada, vídeo da loja), preço e especificações do **X20** (anúncio de 29/10/2026), fotos de entrega, vídeos e logo (foto de perfil).
+- Os preços do X20 podem mudar: confirmar com o cliente antes de publicar.
+
 ## Pendências com o cliente
 
-- Endereço exato e horário de funcionamento (o mapa hoje busca só a cidade).
-- Lista de modelos, fotos e preços.
-- Condições de parcelamento.
+- Horário de funcionamento.
+- Demais modelos, fotos e preços (hoje só o X20 está no catálogo).
+- Marca/fabricante dos modelos e fotos oficiais do fabricante (não identificamos a marca pelo Instagram).
+- Condições de parcelamento dos outros modelos.
 - Domínio.
-- Autorização para usar os vídeos do Instagram.
-- Outros 4 reels não baixados; foto/logo oficial para favicon.
+- Autorização de uso de imagem das pessoas nas fotos de clientes e dos vídeos do Instagram.
+- Reels em colaboração com @lucas.consorcioss (`DfrXu6aMq15`, `DfcU3GYgss1`, `DfKEpWzPb_x`) não baixados; `Df7hq40R59q` baixado mas não usado no site.
 
 ## Deploy
 

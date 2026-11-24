@@ -10,6 +10,7 @@ test("a home compõe as seções na ordem da spec", () => {
     "beneficios",
     "modelos",
     "parcelamento",
+    "loja",
     "clientes",
     "endereco",
   ]);

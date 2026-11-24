@@ -33,8 +33,10 @@ const jsonLd = {
   "@type": "LocalBusiness",
   name: site.nome,
   description: descricao,
+  telephone: "+55 89 98111-7097",
   address: {
     "@type": "PostalAddress",
+    streetAddress: "Rua Tabelião Raimundo José Rocha",
     addressLocality: "Bom Jesus",
     addressRegion: "PI",
     addressCountry: "BR",

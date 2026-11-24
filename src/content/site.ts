@@ -2,6 +2,9 @@ export const site = {
   nome: "E-VOLT Mobilidade",
   slogan: "O futuro da mobilidade chegou! Economia, praticidade e liberdade.",
   cidade: "Bom Jesus – PI",
+  endereco: "Rua Tabelião Raimundo José Rocha, Bom Jesus – PI",
+  referencia: "Ao lado da loja Van Fitness",
+  telefone: "(89) 98111-7097",
   whatsapp: "https://wa.me/message/43435QYQ5CMQJ1",
   instagram: "https://www.instagram.com/evoltmobilidade/",
 };
