@@ -16,7 +16,7 @@ npm run build
 
 - `src/content/site.ts` — nome, slogan, cidade, links de WhatsApp e Instagram, benefícios.
 - `src/content/modelos.ts` — lista de modelos (nome, preço, foto). Vazia = 3 cards "Em breve".
-- `public/videos/` — vídeos já recomprimidos (720p) e posters.
+- `public/videos/` — vídeos da loja e de clientes (720p) com posters. O hero não usa vídeo: é uma cena animada em CSS/SVG (`Hero.tsx` + bloco "Hero animado" em `globals.css`), que respeita `prefers-reduced-motion`.
 - `src/components/` — uma seção por componente.
 
 ## De onde veio o conteúdo
@@ -27,7 +27,7 @@ npm run build
 ## Conteúdo provisório (trocar antes de publicar)
 
 - `public/ia/`: imagens geradas por IA (Gemini) só para o site ficar interativo. Aparecem com o selo "Imagem ilustrativa (IA)". Substituir pelas fotos reais dos modelos da loja antes de publicar.
-- Vídeos do carrossel (`public/videos/hero-*.mp4`): reels da E-VOLT que mostram clientes e lojas de terceiros; confirmar autorização de imagem.
+- Vídeos `loja.mp4` e `clientes.mp4`: reels da E-VOLT; confirmar autorização de imagem das pessoas que aparecem.
 
 - `public/nprime/`: fotos de 4 modelos (Brisa, Brutal, Q-Star II, Vast Universe) tiradas do site do fabricante **NPrime Motor** (nprimemotor.com.br), com selo "Foto do fabricante". Confirmar com a loja quais modelos ela vende e pedir autorização/kit de imprensa ao fabricante. Faltam Fuling, Impacto, Ling Yue e Trovão (ficha: Fuling/Impacto/Ling Yue/Trovão = 1000W, até 75 km, 150 kg).
 

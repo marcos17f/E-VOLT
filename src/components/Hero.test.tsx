@@ -1,9 +1,8 @@
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { Hero } from "./Hero";
-import { videosHero } from "@/content/videos";
 import { site } from "@/content/site";
 
-test("Hero: título e WhatsApp", () => {
+test("Hero: título com o slogan e botão de WhatsApp", () => {
   render(<Hero />);
   expect(screen.getByRole("heading", { level: 1 }).textContent).toContain(
     "Economia, praticidade e liberdade",
@@ -14,51 +13,25 @@ test("Hero: título e WhatsApp", () => {
   );
 });
 
-test("Hero: um vídeo mudo, inline e com poster por slide", () => {
+test("Hero: cena animada em vez de vídeo", () => {
   const { container } = render(<Hero />);
-  const videos = [...container.querySelectorAll("video")];
-  expect(videos).toHaveLength(videosHero.length);
-  expect(videosHero.length).toBeGreaterThanOrEqual(5);
-  videos.forEach((v, i) => {
-    expect(v.muted).toBe(true);
-    expect(v).toHaveAttribute("playsinline");
-    expect(v).toHaveAttribute("poster", videosHero[i].poster);
-  });
-  expect(videos[0]).toHaveAttribute("src", "/videos/inauguracao.mp4");
+  expect(container.querySelector("video")).toBeNull();
+  expect(screen.getByRole("img", { name: /scooter elétrica/i })).toBeInTheDocument();
+  expect(container.querySelector(".ev-road")).not.toBeNull();
+  expect(container.querySelectorAll(".ev-streak").length).toBeGreaterThanOrEqual(4);
+  expect(container.querySelectorAll(".ev-particle").length).toBeGreaterThanOrEqual(10);
 });
 
-test("Hero: carrossel navega pelos pontos, setas e dá a volta", () => {
-  render(<Hero />);
-  const pontos = screen.getAllByRole("button", { name: /ir para o vídeo/i });
-  expect(pontos).toHaveLength(videosHero.length);
-  expect(pontos[0]).toHaveAttribute("aria-current", "true");
-
-  fireEvent.click(pontos[2]);
-  expect(pontos[2]).toHaveAttribute("aria-current", "true");
-  expect(pontos[0]).not.toHaveAttribute("aria-current");
-
-  fireEvent.click(screen.getByRole("button", { name: /próximo/i }));
-  expect(pontos[3]).toHaveAttribute("aria-current", "true");
-
-  fireEvent.click(pontos[0]);
-  fireEvent.click(screen.getByRole("button", { name: /anterior/i }));
-  expect(pontos[videosHero.length - 1]).toHaveAttribute("aria-current", "true");
-});
-
-test("Hero: dois cliques seguidos em próximo avançam dois slides", () => {
-  render(<Hero />);
-  const pontos = screen.getAllByRole("button", { name: /ir para o vídeo/i });
-  const proximo = screen.getByRole("button", { name: /próximo/i });
-  act(() => {
-    proximo.click();
-    proximo.click();
-  });
-  expect(pontos[2]).toHaveAttribute("aria-current", "true");
-});
-
-test("Hero: ao terminar um vídeo, avança para o próximo", () => {
+test("Hero: elementos decorativos ficam fora da acessibilidade", () => {
   const { container } = render(<Hero />);
-  const pontos = screen.getAllByRole("button", { name: /ir para o vídeo/i });
-  fireEvent.ended(container.querySelector("video")!);
-  expect(pontos[1]).toHaveAttribute("aria-current", "true");
+  for (const sel of [".ev-road", ".ev-streaks", ".ev-particles"]) {
+    expect(container.querySelector(sel)).toHaveAttribute("aria-hidden", "true");
+  }
+});
+
+test("Hero: destaca as três palavras do slogan", () => {
+  render(<Hero />);
+  for (const palavra of ["Economia", "Praticidade", "Liberdade"]) {
+    expect(screen.getAllByText(palavra).length).toBeGreaterThanOrEqual(1);
+  }
 });

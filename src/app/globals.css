@@ -26,3 +26,92 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
+
+/* ---------- Hero animado ---------- */
+.ev-aurora {
+  background:
+    radial-gradient(60% 50% at 78% 38%, rgba(34, 197, 94, 0.28), transparent 70%),
+    radial-gradient(45% 40% at 12% 85%, rgba(34, 197, 94, 0.14), transparent 70%),
+    linear-gradient(180deg, #050505 0%, #07120b 60%, #050505 100%);
+  animation: ev-aurora 9s ease-in-out infinite alternate;
+}
+
+.ev-road {
+  perspective: 420px;
+  overflow: hidden;
+  mask-image: linear-gradient(to top, #000 35%, transparent);
+}
+.ev-road::before {
+  content: "";
+  position: absolute;
+  inset: -40% -30% 0;
+  background-image:
+    linear-gradient(rgba(34, 197, 94, 0.6) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 197, 94, 0.4) 1px, transparent 1px);
+  background-size: 64px 64px;
+  transform: rotateX(64deg);
+  transform-origin: 50% 100%;
+  animation: ev-grid 1.1s linear infinite;
+}
+
+.ev-particle {
+  position: absolute;
+  bottom: -12px;
+  border-radius: 9999px;
+  background: #22c55e;
+  box-shadow: 0 0 10px #22c55e;
+  opacity: 0;
+  animation: ev-rise linear infinite;
+}
+
+.ev-ring {
+  position: absolute;
+  width: 78%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(34, 197, 94, 0.5);
+  border-radius: 9999px;
+  opacity: 0;
+  animation: ev-ring 4.2s ease-out infinite;
+}
+
+.ev-streak {
+  position: absolute;
+  right: -30%;
+  height: 2px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.9));
+  opacity: 0;
+  animation: ev-streak linear infinite;
+}
+
+.ev-bob { animation: ev-bob 2.6s ease-in-out infinite; }
+.ev-spin { animation: ev-spin 0.9s linear infinite; }
+.ev-pulse { animation: ev-pulse 1.8s ease-in-out infinite; }
+.ev-bolt { animation: ev-bolt 1.8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.ev-in { opacity: 0; animation: ev-in 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) forwards; }
+
+@keyframes ev-aurora { from { opacity: 0.75; transform: scale(1); } to { opacity: 1; transform: scale(1.06); } }
+@keyframes ev-grid { to { background-position: 0 64px, 64px 0; } }
+@keyframes ev-rise {
+  0% { transform: translateY(0); opacity: 0; }
+  15% { opacity: 0.9; }
+  100% { transform: translateY(-105vh); opacity: 0; }
+}
+@keyframes ev-ring { 0% { transform: scale(0.55); opacity: 0.7; } 100% { transform: scale(1.15); opacity: 0; } }
+@keyframes ev-streak {
+  0% { transform: translateX(0); opacity: 0; }
+  15% { opacity: 0.9; }
+  100% { transform: translateX(-620px); opacity: 0; }
+}
+@keyframes ev-bob { 0%, 100% { transform: translateY(0) rotate(-0.6deg); } 50% { transform: translateY(-10px) rotate(0.6deg); } }
+@keyframes ev-spin { to { transform: rotate(360deg); } }
+@keyframes ev-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
+@keyframes ev-bolt { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0 #22c55e); } 50% { transform: scale(1.12); filter: drop-shadow(0 0 8px #22c55e); } }
+@keyframes ev-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ev-aurora, .ev-road::before, .ev-particle, .ev-ring, .ev-streak,
+  .ev-bob, .ev-spin, .ev-pulse, .ev-bolt { animation: none; }
+  .ev-in { animation: none; opacity: 1; }
+  .ev-particle, .ev-ring, .ev-streak { display: none; }
+}
