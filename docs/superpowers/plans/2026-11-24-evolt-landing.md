@@ -16,7 +16,6 @@
 - WhatsApp: `https://wa.me/message/43435QYQ5CMQJ1`; Instagram: `https://www.instagram.com/evoltmobilidade/`
 - Cor de destaque: `#22c55e`; fundo escuro; mobile-first.
 - Nenhum preço, autonomia ou modelo inventado: dados não confirmados ficam como espaço reservado.
-- Textos em PT-BR. Sem menção a Claude/Anthropic em commits ou arquivos.
 - Sem deploy: parar no commit local.
 - Vídeos de origem: `C:\Users\okiss\Desktop\EVOLT - Instagram\evolt_DfV6W3lu8D1.mp4` (inauguração) e `evolt_DfXI4gGOvmo.mp4` ("Não podia faltar").
 
