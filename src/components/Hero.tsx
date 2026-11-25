@@ -111,18 +111,15 @@ function SlideBlack() {
           sizes="(min-width: 768px) 280px, 45vw"
         />
         <Image
-          src="/ia/x20-recorte.webp"
-          alt="Moto elétrica X20 estilo citycoco vinho"
-          width={907}
-          height={835}
-          className="absolute bottom-10 right-0 h-auto w-[56%] drop-shadow-[0_18px_22px_rgba(0,0,0,0.65)]"
-          sizes="(min-width: 768px) 320px, 50vw"
+          src="/fotos/x20-recorte.webp"
+          alt="Moto elétrica X20 vinho com farol azul, na frente da loja E-VOLT"
+          width={565}
+          height={782}
+          className="absolute bottom-3 right-[8%] h-auto w-[40%] drop-shadow-[0_18px_22px_rgba(0,0,0,0.65)]"
+          sizes="(min-width: 768px) 240px, 40vw"
         />
         <Etiqueta nome="New Bike 1000W" de="R$ 7.200" por="R$ 6.900" className="bottom-0 left-[4%]" />
         <Etiqueta nome="X20 · 1000W" por="R$ 9.900" className="bottom-0 right-[6%]" />
-        <span className="absolute right-0 top-0 z-10 rounded-full bg-black/70 px-3 py-1 text-xs font-medium backdrop-blur">
-          Imagem ilustrativa (IA) · X20
-        </span>
       </div>
     </div>
   );
